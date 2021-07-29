@@ -1,37 +1,48 @@
 import 'package:categories_screen/MyThemeData.dart';
+import 'package:categories_screen/models/FilterModel.dart';
 import 'package:flutter/material.dart';
 
-import 'categories_list.dart';
 import '../screens/meals_list_screen.dart';
 import '../screens/meal_details_screen.dart';
+import './screens/tab_bar_screen.dart';
+import './screens/filters_screen.dart';
 
 void main() {
-  runApp(MaterialApp(
-    theme: ThemeData(
-      primaryColor: MyThemeData.PrimaryColor,
-    ),
-    debugShowCheckedModeBanner: false,
-    home: MyApp(),
-    routes: {
-      MealsListWidget.routeName: (ctx) => MealsListWidget(),
-      MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
-    },
-  ));
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  FilterModel filterModel = FilterModel(
+      isVegetarian: false, isVegan: false, isGluten: false, isLactose: false);
+
+  void setFilter(FilterModel newModel) {
+
+    filterModel = newModel;
+  }
+
+  MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'All Categories',
-        ),
-        backgroundColor: MyThemeData.PrimaryColor,
+    return MaterialApp(
+      theme: ThemeData(
+        primaryColor: MyThemeData.PrimaryColor,
       ),
-      body: CategoriesList(),
+      debugShowCheckedModeBanner: false,
+      // home: MyApp(),
+      routes: {
+        '/': (ctx) => MyTabBarScreen(), //load by default
+        MealsListWidget.routeName: (ctx) => MealsListWidget(widget.filterModel),
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+        FilterScreen.routeName: (ctx) =>
+            FilterScreen(widget.filterModel, widget.setFilter),
+      },
     );
   }
 }

@@ -88,30 +88,29 @@ class MealsListItem extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Container(
+                                Expanded(
                                   child: Row(
                                     children: [
                                       Icon(Icons.schedule),
-                                      Text('${mealItem.duration} min')
+                                      Expanded(child: Text('${mealItem.duration} min',style: TextStyle(fontSize: 12),))
                                     ],
                                   ),
                                 ),
                                 Expanded(
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.attach_money),
-                                        Text('${AffordabilityText}')
-                                      ],
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.attach_money,
+                                      ),
+                                      Expanded(child: Text('${AffordabilityText}',style: TextStyle(fontSize: 12),))
+                                    ],
                                   ),
                                 ),
-                                Container(
+                                Expanded(
                                   child: Row(
                                     children: [
                                       Icon(Icons.work),
-                                      Text('${ComplexityText}')
+                                      Expanded(child: Text('${ComplexityText}',style: TextStyle(fontSize: 12),maxLines: 1,overflow: TextOverflow.ellipsis,))
                                     ],
                                   ),
                                 )

@@ -6,7 +6,7 @@ const CATEGORIES_LIST = const [
   CategoryModel(
     id: 'c1',
     title: 'Italian',
-    color: Colors.purple,
+    color: Colors.lightGreenAccent,
   ),
   CategoryModel(
     id: 'c2',
